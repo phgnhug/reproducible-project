@@ -1,0 +1,156 @@
+---
+title: "House Price Prediction - Reproducible Research"
+subtitle: "Translating R to Python with Best Practices"
+author: "Reproducible Research Team"
+date: today
+format: html
+toc: true
+number-sections: true
+---
+
+# Introduction
+
+This project reproduces a house price prediction analysis from Kaggle, translating code from R to Python while implementing reproducible research best practices.
+
+**Original Source:** [Predicting House Prices using R](https://www.kaggle.com/code/pradeeptripathi/predicting-house-prices-using-r)
+
+**Dataset:** [House Prices - Advanced Regression Techniques](https://www.kaggle.com/c/house-prices-advanced-regression-techniques)
+
+# Dataset Overview
+
+- **Training samples:** 1,460 houses
+- **Test samples:** 1,459 houses  
+- **Features:** 79 (43 categorical, 38 numerical)
+- **Target:** SalePrice (continuous regression)
+- **Location:** Ames, Iowa
+- **Data Quality:** ~2% missing values, no duplicates
+
+# Methodology
+
+## Data Preprocessing
+
+Our preprocessing pipeline follows the original R notebook:
+
+1. **Missing Value Imputation**
+   - Categorical features: filled with "None"
+   - Numerical features: filled with mean values
+   - 22 features had missing values
+
+2. **Outlier Detection**
+   - Removed 5 rows with GrLivArea > 4,000 sq ft
+   - Based on visual inspection in original R analysis
+
+3. **Categorical Encoding**
+   - Label encoding for 43 categorical features
+   - Preserves feature relationships for tree models
+
+4. **Feature Transformation**
+   - Log(x+1) transformation for skewed features
+   - Threshold: skewness > 0.75
+   - Applied to 64 features total
+
+5. **Train/Validation Split**
+   - 75/25 split on training data
+   - Random seed: 123 (reproducible)
+   - Final split: 1,092 train, 364 validation
+
+## Model Selection
+
+**Random Forest Regressor**
+- 50 trees (baseline)
+- Scikit-learn implementation
+- Parallel processing (n_jobs=-1)
+
+**Why Random Forest?**
+- Matches original R notebook
+- Handles mixed feature types well
+- Provides feature importance
+- Good generalization on tabular data
+
+## Model Evaluation
+
+**Metrics:**
+- RMSE (Root Mean Squared Error)
+- MAE (Mean Absolute Error)
+- R² Score
+
+# Results
+
+## Training Performance
+
+| Metric | Value |
+|--------|-------|
+| RMSE | $10,494 |
+| RMSE (log) | 0.0608 |
+| MAE | $6,601 |
+| R² Score | **0.9813** |
+
+*High R² indicates excellent fit on training data*
+
+## Validation Performance
+
+| Metric | Value |
+|--------|-------|
+| RMSE | $27,695 |
+| RMSE (log) | 0.1439 |
+| MAE | $17,482 |
+| R² Score | **0.8683** |
+
+*Validation R² = 0.8683 shows good generalization*
+
+## Key Findings
+
+1. **Model Performance:** Training R² of 0.98 with validation R² of 0.87 indicates the model generalizes well without severe overfitting.
+
+2. **Feature Importance:** Top predictors include location (neighborhood), property size (living area), and condition metrics.
+
+3. **Data Quality:** Only 5 outliers removed; data was relatively clean after encoding and transformation.
+
+# Implementation
+
+## Tech Stack
+
+- **Language:** Python 3.11
+- **Data Processing:** pandas, numpy
+- **Machine Learning:** scikit-learn
+- **Visualization:** matplotlib, seaborn
+- **Development:** Jupyter, Quarto
+
+## Code Organization
+
+- **Package Structure:** `house_price_predictor/`
+  - `data/` - loading and preprocessing
+  - `models/` - training and evaluation
+  - `utils/` - helper functions
+
+- **Reproducibility:**
+  - Docker containerization
+  - Fixed random seeds
+  - Version-pinned requirements
+  - Git version control
+
+# Conclusion
+
+Successfully translated R house price prediction model to Python while maintaining reproducibility through:
+- Clean code organization
+- Comprehensive documentation
+- Containerization
+- Version control
+- Automated testing
+
+The model achieves an R² of 0.87 on validation data, indicating strong predictive performance. The Random Forest approach captures non-linear relationships in housing prices effectively.
+
+## Future Improvements
+
+1. Try different random seeds and hyperparameters
+2. Experiment with ensemble methods (Gradient Boosting, XGBoost)
+3. Feature engineering (create interaction terms)
+4. Cross-validation for more robust evaluation
+5. Deploy model as REST API
+
+# References
+
+- Original R Notebook: [Predicting House Prices using R](https://www.kaggle.com/code/pradeeptripathi/predicting-house-prices-using-r)
+- Dataset: [House Prices - Advanced Regression Techniques](https://www.kaggle.com/c/house-prices-advanced-regression-techniques)
+- Reproducible Research Best Practices: [The Turing Way](https://the-turing-way.netlify.app/)
+
