@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  house-price:
+    build: .
+    container_name: house-price-predictor
+    volumes:
+      - ./data:/app/data
+      - ./results:/app/results
+      - ./notebooks:/app/notebooks
+    working_dir: /app
+    command: /bin/bash
+    stdin_open: true
+    tty: true
+    environment:
+      - PYTHONUNBUFFERED=1
+      - PYTHONDONTWRITEBYTECODE=1
