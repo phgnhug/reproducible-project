@@ -1,0 +1,238 @@
+
+---
+
+title: "House Price Prediction"
+
+subtitle: "Reproducible Research: R to Python Translation"
+
+author: "Reproducible Research Team"
+
+date: today
+
+format: 
+
+  revealjs:
+
+    theme: default
+
+    transition: slide
+
+    background-transition: fade
+
+---
+
+## Project Overview
+
+- **Goal:** Translate R house price prediction to Python
+
+- **Dataset:** Ames, Iowa housing data (1,460 train + 1,459 test)
+
+- **Model:** Random Forest Regressor
+
+- **Result:** R² = 0.8683 on validation set
+
+::: notes
+
+This project demonstrates reproducible research best practices by taking an existing R analysis and translating it to Python while maintaining quality and reproducibility.
+
+:::
+
+---
+
+## Original R Notebook
+
+**Source:** [Predicting House Prices using R](https://www.kaggle.com/code/pradeeptripathi/predicting-house-prices-using-r)
+
+**Methodology:**
+
+- Load and explore data
+
+- Handle missing values
+
+- Remove outliers
+
+- Encode categorical features
+
+- Transform skewed features
+
+- Train Random Forest model
+
+- Evaluate performance
+
+---
+
+## Our Python Translation
+
+**Key Differences:**
+
+- Translated R libraries to Python equivalents
+
+- Organized code into reusable classes
+
+- Added Docker for reproducibility
+
+- Implemented version control best practices
+
+- Created comprehensive documentation
+
+**Python Stack:**
+
+- pandas (data manipulation)
+
+- scikit-learn (machine learning)
+
+- matplotlib/seaborn (visualization)
+
+---
+
+## Team & Roles
+
+| Person | Role | Contribution |
+
+|--------|------|--------------|
+
+| **A (Nhung)** | Data Loading & EDA | Created DataLoader class |
+
+| **B (Chloe)** | Feature Engineering | Created DataPreprocessor class |
+
+| **C (Sherry)** | Model Training | Created ModelTrainer & ModelEvaluator |
+
+**Collaboration:** Git with feature branches, code review, PRs
+
+---
+
+## Data Preprocessing Pipeline
+
+**5 Key Steps:**
+
+1. **Missing Value Imputation** (22 features affected)
+
+   - Categorical → "None"
+
+   - Numerical → mean value
+
+2. **Outlier Removal** (5 rows removed)
+
+   - GrLivArea > 4,000 sq ft
+
+3. **Categorical Encoding** (43 features)
+
+   - Label encoding for tree models
+
+4. **Feature Transformation** (64 features)
+
+   - Log(x+1) for skewed features (threshold > 0.75)
+
+5. **Train/Validation Split**
+
+   - 75/25 split, seed=123
+
+---
+
+## Model Performance
+
+### Training Set
+
+- **RMSE:** $10,494
+
+- **R² Score:** 0.9813 ✓ (excellent fit)
+
+### Validation Set
+
+- **RMSE:** $27,695
+
+- **R² Score:** 0.8683 ✓ (good generalization!)
+
+- **MAE:** $17,482
+
+**Interpretation:** Model generalizes well without severe overfitting
+
+---
+
+## Key Findings
+
+**Top Predictive Features:**
+
+1. Neighborhood (location)
+
+2. Living area (GrLivArea)
+
+3. Overall quality
+
+4. Basement features
+
+**Model Insights:**
+
+- Random Forest captures non-linear price relationships
+
+- Feature interactions matter (e.g., location × size)
+
+- Data quality was good (only 5 outliers)
+
+---
+
+## Reproducibility: Docker
+
+**Why Docker?**
+
+- Consistent environment across machines
+
+- Same versions of all dependencies
+
+- Professor can pull and run instantly
+
+**Our Docker Image:**
+
+```bash
+
+docker pull phgnhug/house-price-predictor:latest
+
+docker run -it phgnhug/house-price-predictor:latest
+
+python3 test_pipeline.py
+
+```
+
+---
+
+## Project Structure
+**All on GitHub:** phgnhug/reproducible-project
+
+---
+
+## What We Did Well
+
+We used Git properly - everyone worked on their own branch, we reviewed each other's code before merging. Set up Docker so anyone can run this without installing a bunch of stuff. Documented everything as we went instead of at the end. Fixed bugs as we found them instead of letting them pile up.
+
+Pretty standard stuff but it makes a huge difference when you're working as a team.
+
+---
+
+## What's Next
+
+We could try XGBoost or do more hyperparameter tuning. Maybe add some interaction features or do proper cross-validation. Could deploy this as an API if we wanted real predictions. But for now, the model works well and we can reproduce everything.
+
+---
+
+## Live Demo
+
+Let me show you the pipeline running:
+
+```bash
+python3 test_pipeline.py
+```
+
+Should load the data, preprocess, train the model, and spit out R² = 0.8683 on the validation set.
+
+---
+
+## Questions?
+
+**GitHub:** https://github.com/phgnhug/reproducible-project
+
+**Docker:** https://hub.docker.com/r/phgnhug/house-price-predictor
+
+**Original:** [Kaggle Notebook](https://www.kaggle.com/code/pradeeptripathi/predicting-house-prices-using-r)
+
+**Hit me up:** nn122625@student.sgh.waw.pl
+
