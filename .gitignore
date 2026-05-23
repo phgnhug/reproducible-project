@@ -32,7 +32,6 @@ venv.bak/
 *~
 .DS_Store
 .ipynb_checkpoints
-*.ipynb
 .pytest_cache/
 .coverage
 htmlcov/
