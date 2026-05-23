@@ -53,9 +53,9 @@ make install
 
 | Person | Role | Files |
 |--------|------|-------|
-| A | Data Loading & EDA | `house_price_predictor/data/loader.py`, `notebooks/01_exploration.ipynb` |
-| B | Preprocessing & Feature Engineering | `house_price_predictor/data/preprocessor.py`, `notebooks/02_preprocessing.ipynb` |
-| C | Model Training & Evaluation | `house_price_predictor/models/trainer.py`, `house_price_predictor/models/evaluator.py` |
+| Nhung | Data Loading & EDA | `house_price_predictor/data/loader.py`, `notebooks/01_exploration.ipynb` |
+|Sherry | Preprocessing & Feature Engineering | `house_price_predictor/data/preprocessor.py`, `notebooks/02_preprocessing.ipynb` |
+| Chloe | Model Training & Evaluation | `house_price_predictor/models/trainer.py`, `house_price_predictor/models/evaluator.py` |
 
 ## Commands
 
