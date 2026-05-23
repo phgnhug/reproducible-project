@@ -29,6 +29,10 @@ dev = [
     "sphinx>=7.0.0",
 ]
 
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["house_price_predictor*"]
+
 [tool.black]
 line-length = 100
 target-version = ["py311"]
