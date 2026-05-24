@@ -1,27 +1,30 @@
-# Quick Start for Presentation
+# House Price Prediction - Reproducible Research Project
 
-## Prerequisites
-- Docker installed
+Translating R Kaggle analysis to Python with reproducibility best practices.
 
-## Run the Project & Generate Report
+## Quick Start
 
 ```bash
-# Step 1: Pull image from DockerHub
+# Pull Docker image
 docker pull phgnhug/house-price-predictor:latest
 
-# Step 2: Create output folder
-mkdir -p output
+# Run pipeline
+docker run -it phgnhug/house-price-predictor:latest bash -c "python3 test_pipeline.py"
 
-# Step 3: Run pipeline and generate report
-docker run -v $(pwd)/output:/app/output phgnhug/house-price-predictor:latest bash -c "python3 test_pipeline.py && quarto render report/final_report.qmd -o /app/output/report.html"
-
-# Step 4: View the report
-open output/report.html
+# Expected output:
+# ✅ ALL TESTS PASSED!
+# VALIDATION R²: 0.8683
 ```
 
-The report will show:
-- Dataset overview
-- Preprocessing steps
-- Model results (R² = 0.8683)
-- Feature importance
-- Conclusions
+## Results
+- Training R²: 0.9813
+- Validation R²: 0.8683
+- Model: Random Forest (50 trees)
+
+## GitHub
+https://github.com/phgnhug/reproducible-project
+
+## Team
+- Nhung Nguyen (data loading)
+- Chau Phan (preprocessing)
+- Sherry (model training)
