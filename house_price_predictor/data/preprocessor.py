@@ -18,18 +18,18 @@ class DataPreprocessor:
     def handle_missing_values(self) -> pd.DataFrame:
         """Handle missing values in the dataset."""
         print("Handling missing values...")
-        categorical = self.data.select_dtypes(include=["object"]).columns
+        categorical = self.data.select_dtypes(include=["object", "str"]).columns
         numeric = self.data.select_dtypes(include=[np.number]).columns
 
         for col in categorical:
             if self.data[col].isnull().any():
-                self.data[col].fillna("None", inplace=True)
+                self.data[col] = self.data[col].fillna("None")
                 print(f"  ✓ {col}: Filled with 'None'")
 
         for col in numeric:
             if col != "SalePrice" and self.data[col].isnull().any():
                 fill_value = self.data[col].mean()
-                self.data[col].fillna(fill_value, inplace=True)
+                self.data[col] = self.data[col].fillna(fill_value)
                 print(f"  ✓ {col}: Filled with mean ({fill_value:.2f})")
         print()
         return self.data
@@ -49,7 +49,7 @@ class DataPreprocessor:
     def encode_categorical(self) -> pd.DataFrame:
         """Encode categorical variables."""
         print("Encoding categorical variables...")
-        categorical = self.data.select_dtypes(include=["object"]).columns
+        categorical = self.data.select_dtypes(include=["object", "str"]).columns
         self.categorical_cols = list(categorical)
 
         for col in categorical:
@@ -76,7 +76,9 @@ class DataPreprocessor:
         print()
         return self.data
 
-    def create_train_validation_split(self, test_size: float = 0.25, random_state: int = 123) -> Tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
+    def create_train_validation_split(
+        self, test_size: float = 0.25, random_state: int = 123
+    ) -> Tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
         """Split training data into train and validation sets."""
         from sklearn.model_selection import train_test_split
 
