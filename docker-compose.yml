@@ -1,13 +1,23 @@
 version: '3.8'
 
 services:
-  house-price:
+  # Pull from DockerHub and generate report (for presentation)
+  report:
+    image: phgnhug/house-price-predictor:latest
+    container_name: house-price-report
+    volumes:
+      - ./report:/app/report
+    working_dir: /app
+    command: make report
+
+  # Build locally for development
+  dev:
     build: .
-    container_name: house-price-predictor
+    container_name: house-price-dev
     volumes:
       - ./data:/app/data
       - ./results:/app/results
-      - ./notebooks:/app/notebooks
+      - ./report:/app/report
     working_dir: /app
     command: /bin/bash
     stdin_open: true
