@@ -16,16 +16,16 @@ Docker containerisation, linting, automated testing, Quarto reporting, and Sphin
 ## Quick Start (Presentation)
 
 ```bash
-# Pull image from DockerHub
-docker pull phgnhug/house-price-predictor:latest
+# 1. Clone the repo
+git clone https://github.com/phgnhug/reproducible-project.git
+cd reproducible-project
 
-# Generate the HTML report
-docker run --rm \
-  -v $(pwd)/report:/app/report \
-  phgnhug/house-price-predictor:latest \
-  make report
+# 2. Pull image and generate report (one command)
+docker-compose run --rm report
 
-# Open report/final_report.html in your browser
+# 3. Open the report
+open report/final_report.html        # Mac
+start report\final_report.html       # Windows
 ```
 
 ---
