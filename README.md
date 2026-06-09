@@ -69,3 +69,22 @@ This project used **Claude Sonnet** (Anthropic) to assist with:
 - README structure
 
 All pipeline logic, model choices, and results are the team's own work.
+
+---
+
+## Alternative Docker Command (if docker-compose fails)
+
+**Mac/Linux:**
+```bash
+docker run --rm -v $(pwd)/report:/app/report phgnhug/house-price-predictor:latest make report
+```
+
+**Windows PowerShell:**
+```bash
+docker run --rm -v ${PWD}/report:/app/report phgnhug/house-price-predictor:latest make report
+```
+
+**Windows Command Prompt:**
+```bash
+docker run --rm -v %cd%/report:/app/report phgnhug/house-price-predictor:latest make report
+```
