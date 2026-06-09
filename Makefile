@@ -32,7 +32,7 @@ test:
 	pytest tests/ -v --cov=house_price_predictor --cov-report=term-missing
 
 report:
-	quarto render report/final_report.qmd --to html
+	quarto render reports/final_report.qmd --to html
 	@echo "Report generated: report/final_report.html"
 
 docs:
