@@ -25,3 +25,9 @@ services:
     environment:
       - PYTHONUNBUFFERED=1
       - PYTHONDONTWRITEBYTECODE=1
+
+  test:
+    image: phgnhug/house-price-predictor:latest
+    container_name: house-price-test
+    working_dir: /app
+    command: make test
